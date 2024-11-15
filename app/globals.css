@@ -86,3 +86,26 @@ body {
     @apply bg-background text-foreground;
   }
 }
+/* Add a background with moving tools */
+.bg-moving-tools {
+  background-image: url("/path/to/your/tools-image.png"); /* Use your own image */
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1; /* Keep the background behind the content */
+  animation: moveBackground 10s infinite linear; /* Animation duration and infinite loop */
+}
+
+/* Animation to move the tools */
+@keyframes moveBackground {
+  0% {
+    transform: translateX(0); /* Start from initial position */
+  }
+  100% {
+    transform: translateX(-100%); /* Move the tools across the screen */
+  }
+}

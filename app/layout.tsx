@@ -11,7 +11,14 @@ import {
 import { Separator } from "@radix-ui/react-separator";
 
 import { FaTools, FaSearch } from "react-icons/fa";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  SignIn,
+  UserButton,
+} from "@clerk/nextjs";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,74 +42,85 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <SidebarProvider
-          style={
-            {
-              "--sidebar-width": "19rem",
-            } as React.CSSProperties
-          }
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <AppSidebar />
-          <SidebarInset>
-            <header className="flex h-16 shrink-0 items-center gap-2 px-4">
-              <SidebarTrigger className="-ml-1" />
-              <Separator orientation="vertical" className="mr-2 h-4" />
-              <div
-                className="flex flex-1 items-center gap-4 justify-between
+          <SignedIn>
+            <SidebarProvider
+              style={
+                {
+                  "--sidebar-width": "19rem",
+                } as React.CSSProperties
+              }
+            >
+              <AppSidebar />
+              <SidebarInset>
+                <header className="flex h-16 shrink-0 items-center gap-2 px-4">
+                  <SidebarTrigger className="-ml-1" />
+                  <Separator orientation="vertical" className="mr-2 h-4" />
+                  <div
+                    className="flex flex-1 items-center gap-4 justify-between
           "
-              >
-                <h1 className="text-lg font-semibold flex flex-row items-center justify-center gap-3">
-                  <FaTools /> FixItHub
-                </h1>
-                <div className="flex flex-row justify-center items-center gap-2">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    className="border border-slate-700 rounded-xl px-10 py-1 text-sm"
-                  />
-                  <button className="">
-                    <FaSearch />
-                  </button>
+                  >
+                    <Link
+                      href="/"
+                      className="text-lg font-semibold flex flex-row items-center justify-center gap-3"
+                    >
+                      <FaTools /> FixItHub
+                    </Link>
+                    <div className="flex flex-row justify-center items-center gap-2">
+                      <Input
+                        type="text"
+                        placeholder="Search..."
+                        size={40}
+                        className=" rounded-xl text-sm border-slate-500"
+                      />
+                      <button className="">
+                        <FaSearch color="gray" />
+                      </button>
+                    </div>
+                    <nav className="flex flex-row gap-8 items-center justify-center">
+                      <ul className="flex gap-4 items-center justify-center">
+                        <li>
+                          <Link href="/" className="text-sm ">
+                            Home
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/services" className="text-sm ">
+                            Services
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/subscription" className="text-sm ">
+                            Subscription
+                          </Link>
+                        </li>
+                        <li>
+                          <UserButton />
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </header>
+                <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                  {children}
                 </div>
-                <nav className="flex flex-row gap-8 items-center justify-center">
-                  <ul className="flex gap-4 items-center justify-center">
-                    <li>
-                      <Link href="/" className="text-sm ">
-                        Home
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/services" className="text-sm ">
-                        Services
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/subscription" className="text-sm ">
-                        Subscription
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/account">
-                        <Avatar className="border-2 border-slate-700">
-                          <AvatarImage src="" alt="avatar" />
-                          <AvatarFallback>MM</AvatarFallback>
-                        </Avatar>
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </header>
-            <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-              {children}
+              </SidebarInset>
+            </SidebarProvider>
+          </SignedIn>
+          <SignedOut>
+            <div className="relative flex h-screen items-center justify-center bg-white flex-col gap-2 --font-geist-sans">
+              <h1 className="text-3xl text-black font-bold z-10">
+                Welcome to FixItHub
+              </h1>
+              <SignIn routing="hash" />
             </div>
-          </SidebarInset>
-        </SidebarProvider>
-      </body>
-    </html>
+          </SignedOut>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
