@@ -10,8 +10,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Separator } from "@radix-ui/react-separator";
 
-import { FaTools, FaSearch } from "react-icons/fa";
-import { Input } from "@/components/ui/input";
+import { FaTools } from "react-icons/fa";
 import { ClerkProvider, SignedIn, SignedOut, SignIn } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
 
