@@ -12,13 +12,8 @@ import { Separator } from "@radix-ui/react-separator";
 
 import { FaTools, FaSearch } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignIn,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider, SignedIn, SignedOut, SignIn } from "@clerk/nextjs";
+import Navbar from "@/components/Navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -70,39 +65,8 @@ export default function RootLayout({
                     >
                       <FaTools /> FixItHub
                     </Link>
-                    <div className="flex flex-row justify-center items-center gap-2">
-                      <Input
-                        type="text"
-                        placeholder="Search..."
-                        size={40}
-                        className=" rounded-xl text-sm border-slate-500"
-                      />
-                      <button className="">
-                        <FaSearch color="gray" />
-                      </button>
-                    </div>
-                    <nav className="flex flex-row gap-8 items-center justify-center">
-                      <ul className="flex gap-4 items-center justify-center">
-                        <li>
-                          <Link href="/" className="text-sm ">
-                            Home
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/services" className="text-sm ">
-                            Services
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/subscription" className="text-sm ">
-                            Subscription
-                          </Link>
-                        </li>
-                        <li>
-                          <UserButton />
-                        </li>
-                      </ul>
-                    </nav>
+
+                    <Navbar />
                   </div>
                 </header>
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

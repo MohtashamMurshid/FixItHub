@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const ImageSlider = () => {
@@ -10,6 +10,16 @@ const ImageSlider = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
@@ -24,8 +34,9 @@ const ImageSlider = () => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto ">
-      <div className="relative w-full h-[200px] overflow-hidden">
+    <div className="w-full lg:max-w-full mx-auto">
+      {/* Slider Container */}
+      <div className="relative w-full h-[250px] sm:h-[350px] lg:h-[450px] overflow-hidden">
         <div
           className="flex transition-transform duration-500"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -36,9 +47,10 @@ const ImageSlider = () => {
                 src={src}
                 alt={`Slide ${index + 1}`}
                 width={800}
-                height={400}
+                height={450}
                 layout="responsive"
                 objectFit="cover"
+                className="rounded-md"
               />
             </div>
           ))}
@@ -47,19 +59,17 @@ const ImageSlider = () => {
         {/* Navigation Buttons */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-600"
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full shadow-md hover:bg-gray-600 z-10"
         >
           &#8249;
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-600"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full shadow-md hover:bg-gray-600 z-10"
         >
           &#8250;
         </button>
       </div>
-
-      {/* Dots Navigation */}
     </div>
   );
 };
