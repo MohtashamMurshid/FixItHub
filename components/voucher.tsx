@@ -14,7 +14,7 @@ const VoucherCard: React.FC<VoucherCardProps> = ({
   onRedeem,
 }) => {
   return (
-    <div className="bg-white shadow-lg rounded-md p-4 border border-black/70">
+    <div className="bg-white shadow-lg rounded-md p-4 border border-x-slate-200">
       <h2 className="text-xl font-bold mb-2">{title}</h2>
       <p className="text-gray-600 mb-4">{description}</p>
       <button
