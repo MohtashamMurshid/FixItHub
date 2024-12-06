@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+      }
+
+      h1 {
+        text-align: center;
+        margin: 20px 0;
+        color: #333;
+      }
+
+      .search-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+
+      .search-container input {
+        width: 80%;
+        max-width: 500px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      .services-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .service-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        width: 250px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .service-card:hover {
+        transform: scale(1.05);
+      }
+
+      .service-card h3 {
+        margin: 10px 0;
+        color: #333;
+      }
+
+      .service-card p {
+        color: #777;
+      }
+
+      .service-cost {
+        color: #27ae60;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>Our Services</h1>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+      <input
+        type="text"
+        id="searchBar"
+        placeholder="Search for services..."
+        onkeyup="filterServices()"
+      />
+    </div>
+
+    <!-- Services -->
+    <section class="services-container" id="servicesContainer">
+      <!-- Example service cards -->
+      <div class="service-card" data-title="Web Development">
+        <h3>Web Development</h3>
+        <p>Build stunning websites with modern tools and technologies.</p>
+        <p class="service-cost">$500</p>
+      </div>
+      <div class="service-card" data-title="Mobile App Development">
+        <h3>Mobile App Development</h3>
+        <p>Create user-friendly mobile apps for Android and iOS platforms.</p>
+        <p class="service-cost">$700</p>
+      </div>
+      <div class="service-card" data-title="Graphic Design">
+        <h3>Graphic Design</h3>
+        <p>Design visually appealing graphics for your brand or project.</p>
+        <p class="service-cost">$300</p>
+      </div>
+      <div class="service-card" data-title="SEO Optimization">
+        <h3>SEO Optimization</h3>
+        <p>Enhance your website's visibility with professional SEO services.</p>
+        <p class="service-cost">$400</p>
+      </div>
+      <div class="service-card" data-title="Digital Marketing">
+        <h3>Digital Marketing</h3>
+        <p>
+          Boost your online presence with targeted digital marketing campaigns.
+        </p>
+        <p class="service-cost">$600</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 My Services. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      // Function to filter services
+      function filterServices() {
+        const searchInput = document
+          .getElementById("searchBar")
+          .value.toLowerCase();
+        const services = document.querySelectorAll(".service-card");
+
+        services.forEach((service) => {
+          const title = service.getAttribute("data-title").toLowerCase();
+          if (title.includes(searchInput)) {
+            service.style.display = "block";
+          } else {
+            service.style.display = "none";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
